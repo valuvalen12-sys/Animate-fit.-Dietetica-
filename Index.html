@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate Fit - Dietética & Vida Saludable</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        earth: { 50: '#FDFBF7', 100: '#F4ECE1', 200: '#E6D5C3', 300: '#D4BAA2' },
+                        violetpastel: { light: '#F3E8FF', DEFAULT: '#C084FC', dark: '#9333EA', soft: '#E9D5FF' },
+                        rosapt: { light: '#FCE7F3', DEFAULT: '#F472B6', soft: '#FBCFE8' },
+                        terracotta: { light: '#FFEDD5', DEFAULT: '#D97706', warm: '#B45309' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+</head>
+<body class="bg-earth-50 text-stone-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-earth-50/90 backdrop-blur-md border-b border-earth-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-violetpastel to-rosapt flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-seedling text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold tracking-tight text-stone-900">Animate<span class="text-violetpastel-dark">Fit</span></span>
+                    <span class="block text-[10px] tracking-widest uppercase text-stone-500 font-medium">Dietética & Bienestar</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full bg-earth-100 hover:bg-earth-200 text-stone-700 transition-colors">
+                    <i class="fa-solid fa-shopping-bag text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-rosapt text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero -->
+        <section class="py-16 bg-gradient-to-b from-violetpastel-light/40 to-earth-50 text-center px-4">
+            <h1 class="text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
+                Nutrición que inspira tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-violetpastel-dark to-rosapt">bienestar diario</span>
+            </h1>
+            <p class="text-stone-600 mt-4 max-w-xl mx-auto">Descubrí nuestros productos naturales, frutos secos, semillas y opciones saludables.</p>
+            
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+                <a href="https://wa.me/5493412501234?text=Hola!%20Quiero%20consultar%20sobre%20los%20productos%20de%20Animate%20Fit" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-xl shadow-md transition-colors text-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Escribinos por WhatsApp
+                </a>
+                <a href="https://instagram.com/animate_fit" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90 text-white font-medium rounded-xl shadow-md transition-opacity text-sm">
+                    <i class="fa-brands fa-instagram text-lg"></i> @animate_fit
+                </a>
+            </div>
+        </section>
+
+        <!-- Productos -->
+        <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-stone-900 text-center mb-8">Nuestros Productos</h2>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- Información y Ubicación -->
+        <section class="py-12 bg-earth-100/60 border-t border-earth-200">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+                <h3 class="text-2xl font-bold text-stone-900">Visítanos o Contáctanos</h3>
+                <div class="flex flex-col sm:flex-row justify-center gap-8 text-stone-700 text-sm">
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-location-dot text-violetpastel-dark"></i>
+                        <span>Catamarca 1515, Rosario</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone text-violetpastel-dark"></i>
+                        <span>341 250-1234</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-envelope text-violetpastel-dark"></i>
+                        <span>valuvalen12@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Carrito y Datos de Transferencia -->
+    <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-stone-900/40 backdrop-blur-xs" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+                <div class="p-6 border-b border-earth-200 flex items-center justify-between">
+                    <h2 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+                        <i class="fa-solid fa-shopping-bag text-violetpastel-dark"></i> Tu Carrito
+                    </h2>
+                    <button onclick="toggleCart()" class="text-stone-400 hover:text-stone-600 p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                
+                <div id="cart-items" class="p-6 overflow-y-auto flex-grow space-y-4">
+                    <p class="text-center text-stone-400 py-12">Tu carrito está vacío</p>
+                </div>
+
+                <!-- Info de Transferencia -->
+                <div class="p-4 bg-violetpastel-light/40 border-t border-earth-200 text-xs space-y-1 text-stone-700">
+                    <p class="font-bold text-violetpastel-dark"><i class="fa-solid fa-circle-info"></i> Importante:</p>
+                    <p>Antes de finalizar, realiza tu transferencia al alias:</p>
+                    <p class="text-sm font-bold text-stone-900 mt-1">vallejoss.09</p>
+                    <p class="text-[10px] text-stone-500 mt-1">O encarga directamente a nuestro número (3412501234). Envianos el comprobante por WhatsApp.</p>
+                </div>
+
+                <div class="p-6 border-t border-earth-200 bg-earth-50/50 space-y-4">
+                    <div class="flex items-center justify-between font-bold text-stone-900 text-lg">
+                        <span>Total:</span>
+                        <span id="cart-total">$0</span>
+                    </div>
+                    <button onclick="checkoutWhatsApp()" class="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-xl transition-colors shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Encargar / Enviar pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-stone-900 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3 text-sm font-medium">
+        <i class="fa-solid fa-circle-check text-rosapt"></i>
+        <span id="toast-message">Producto agregado</span>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const products = [
+            { id: 1, name: 'Mix Energético Premium 500g', price: 4800, icon: 'fa-seedling', desc: 'Almendras, nueces, cajú y pasas.' },
+            { id: 2, name: 'Almendras Nonpareil 250g', price: 3900, icon: 'fa-circle-dot', desc: 'Seleccionadas y tostadas sin sal.' },
+            { id: 3, name: 'Semillas de Chía Orgánica 500g', price: 2100, icon: 'fa-wheat-awn', desc: 'Ricas en omega 3 y fibra.' },
+            { id: 4, name: 'Granola Artesanal Sin Tacc 400g', price: 3500, icon: 'fa-bowl-food', desc: 'Avena certificada y miel.' }
+        ];
+
+        let cart = [];
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl p-5 shadow-sm border border-earth-200 flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="h-32 rounded-xl bg-violetpastel-light/60 flex items-center justify-center mb-4 text-violetpastel-dark text-3xl">
+                            <i class="fa-solid ${p.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-stone-800 text-base">${p.name}</h3>
+                        <p class="text-xs text-stone-500 mt-1">${p.desc}</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 mt-4 border-t border-earth-100">
+                        <span class="text-base font-bold text-stone-900">$${p.price.toLocaleString()}</span>
+                        <button onclick="addToCart('${p.name}', ${p.price})" class="px-3.5 py-2 bg-violetpastel-light text-violetpastel-dark hover:bg-violetpastel hover:text-white rounded-xl text-xs font-semibold transition-colors">
+                            Agregar
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addToCart(name, price) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) { existing.quantity += 1; } 
+            else { cart.push({ name, price, quantity: 1 }); }
+            updateCartUI();
+            showToast(`Agregaste ${name}`);
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+
+            badge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-stone-400 py-12">Tu carrito está vacío</p>`;
+                totalEl.textContent = '$0';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between bg-earth-50 p-3 rounded-xl border border-earth-200';
+                div.innerHTML = `
+                    <div>
+                        <h4 class="text-sm font-bold text-stone-800">${item.name}</h4>
+                        <span class="text-xs text-stone-500">$${item.price} x ${item.quantity}</span>
+                    </div>
+                    <button onclick="removeFromCart('${item.name}')" class="text-stone-400 hover:text-red-500 p-1"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                `;
+                container.appendChild(div);
+            });
+            totalEl.textContent = `$${total.toLocaleString()}`;
+        }
+
+        function toggleCart() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3000);
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) { showToast('El carrito está vacío'); return; }
+            let texto = "Hola! Quiero encargar el siguiente pedido en Animate Fit:%0A";
+            let total = 0;
+            cart.forEach(item => {
+                texto += `- ${item.quantity}x ${item.name} ($${item.price * item.quantity})%0A`;
+                total += item.price * item.quantity;
+            });
+            texto += `%0A*Total: $${total}*%0ATransferí al alias: *vallejoss.09*%0A_Adjunto comprobante._`;
+            window.open(`https://wa.me/5493412501234?text=${texto}`, '_blank');
+        }
+
+        window.onload = () => renderProducts();
+    </script>
+</body>
+</html>
